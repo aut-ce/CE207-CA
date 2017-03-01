@@ -20,6 +20,7 @@ architecture arch_mux_t of mux_t is
 	signal sel : std_logic_vector(1 downto 0);
 	signal o : std_logic;
 	for all:mux use entity work.mux(beh_arch_mux);
+	-- for all:mux use entity work.mux(seq_arch_mux);
 begin
 	m : mux port map (sel, i, o);
 	i <= "1101";
