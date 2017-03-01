@@ -35,5 +35,6 @@ begin
 			o <= i(2);
 		elsif sel = "11" then
 			o <= i(3);
+		end if;
 	end process
 end architecture seq_arch_mux;
