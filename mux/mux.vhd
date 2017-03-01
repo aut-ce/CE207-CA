@@ -23,3 +23,17 @@ begin
 		     'X' when others;
 end architecture beh_arch_mux;
 
+architecture seq_arch_mux of mux is
+begin
+	process (sel)
+	begin
+		if sel = "00" then
+			o <= i(0);
+		elsif sel = "01" then
+			o <= i(1);
+		elsif sel = "10" then
+			o <= i(2);
+		elsif sel = "11" then
+			o <= i(3);
+	end process
+end architecture seq_arch_mux;
