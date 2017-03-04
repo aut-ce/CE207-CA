@@ -21,3 +21,7 @@ D-FlipFlop module with 2 architecture:
 
 - wait statement
 - sensitivity list
+
+### Sample RTL
+
+Dummy sample of register transfer level design.
