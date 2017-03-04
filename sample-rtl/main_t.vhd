@@ -23,5 +23,5 @@ begin
 	m : main port map (clk, reset, data_in, data_out);
 	reset <= '1', '0' after 10 ns;
 	clk <= not clk after 50 ns;
-	data_in <= "0101", "1010" after 50 ns;
+	data_in <= "0101", "1010" after 100 ns;
 end architecture;
