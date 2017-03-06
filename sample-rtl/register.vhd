@@ -22,8 +22,8 @@ begin
 			if load = '1' then
 				q <= d;
 			elsif shift='1' then
-			  qout <= q(3);
-			  q <= q(2 downto 0) & '0';
+				qout <= q(3);
+				q <= q(2 downto 0) & '0';
 			end if;
 		end if;
 	end process;
