@@ -9,29 +9,45 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity memory is
-	port (address : in std_logic_vector;
-		data_in : in std_logic_vector;
-		data_out : out std_logic_vector;
-		clk, rwbar : in std_logic);
+	generic (blocksize : integer := 1024);
+
+	port (clk, readmem, writemem : in std_logic;
+		addressbus: in std_logic_vector (15 downto 0);
+		databus : inout std_logic_vector (15 downto 0);
+		memdataready : out std_logic);
 end entity memory;
 
 architecture behavioral of memory is
-	type mem is array (natural range <>, natural range <>) of std_logic;
+	type mem is array (0 to blocksize - 1) of std_logic_vector (15 downto 0);
 begin
 	process (clk)
-		constant memsize : integer := 2 ** address'length;
-		variable memory : mem (0 to memsize - 1, data_in'range);
+		variable buffermem : mem := (others => (others => '0'));
+		variable ad : integer;
+		variable init : boolean := true;
 	begin
+		if init = true then
+			-- some initiation
+			init := false;
+		end if;
+
 		if  clk'event and clk = '1' then
-			if rwbar = '1' then -- Readiing :)
-				for i in data_out'range loop
-					data_out(i) <= memory (to_integer(unsigned(address)), i);
-				end loop;
-			else -- Writing :)
-				for i in data_in'range loop
-					memory (to_integer(unsigned(address)), i) := data_in (i);
-				end loop;
+			ad := to_integer(unsigned(addressbus));
+
+			if readmem = '1' then -- Readiing :)
+				memdataready <= '0';
+				if ad >= blocksize then
+					databus <= (others => 'Z');
+				else
+					databus <= buffermem(ad);
+				end if;
+			elsif writemem = '1' then -- Writing :)
+				memdataready <= '0';
+				if ad < blocksize then
+					buffermem(ad) := databus;
+				end if;
+
 			end if;
+			memdataready <= '1';
 		end if;
 	end process;
 end architecture behavioral;
