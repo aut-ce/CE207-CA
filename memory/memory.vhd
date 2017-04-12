@@ -27,6 +27,7 @@ begin
 	begin
 		if init = true then
 			-- some initiation
+			buffermem(0) := "0000000000000000";
 			init := false;
 		end if;
 
