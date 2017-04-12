@@ -25,3 +25,28 @@ D-FlipFlop module with 2 architecture:
 ### Sample RTL
 
 Dummy sample of register transfer level design.
+
+### Memory
+
+Sample memory for SAYEH base computer with initiation phase and control signals.
+
+### SAYEH Testing
+
+You can add following codes into initiation phase of SAYEH memory and test them.
+
+```vhdl
+-- cwp
+buffermem(0) := "00000000_00000110"
+
+-- mil r0, 01011101
+buffermem(0) := "11110000_01011101"
+
+-- mih r0, 00000101
+buffermem(0) := "11110001_00000101"
+
+-- mil r1, 00000001
+buffermem(0) := "11110100_00000001"
+
+-- mih r1, 00000000
+buffermem(0) := "11110101_00000000"
+```
