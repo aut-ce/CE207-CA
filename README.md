@@ -39,14 +39,17 @@ You can add following codes into initiation phase of SAYEH memory and test them.
 buffermem(0) := "00000000_00000110"
 
 -- mil r0, 01011101
-buffermem(0) := "11110000_01011101"
+buffermem(1) := "11110000_01011101"
 
 -- mih r0, 00000101
-buffermem(0) := "11110001_00000101"
+buffermem(2) := "11110001_00000101"
 
 -- mil r1, 00000001
-buffermem(0) := "11110100_00000001"
+buffermem(3) := "11110100_00000001"
 
 -- mih r1, 00000000
-buffermem(0) := "11110101_00000000"
+buffermem(4) := "11110101_00000000"
+
+-- add r1, r0
+buffermem(5) := "00000000_10110100"
 ```
