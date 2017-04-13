@@ -31,6 +31,8 @@ begin
 			init := false;
 		end if;
 
+		databus <= (others => 'Z');
+
 		if  clk'event and clk = '1' then
 			ad := to_integer(unsigned(addressbus));
 
