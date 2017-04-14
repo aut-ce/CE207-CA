@@ -32,25 +32,25 @@ begin
 		end if;
 
 		databus <= (others => 'Z');
+		memdataready <= '0';
 
 		if  clk'event and clk = '1' then
 			ad := to_integer(unsigned(addressbus));
 
 			if readmem = '1' then -- Readiing :)
-				memdataready <= '0';
+				memdataready <= '1';
 				if ad >= blocksize then
 					databus <= (others => 'Z');
 				else
 					databus <= buffermem(ad);
 				end if;
 			elsif writemem = '1' then -- Writing :)
-				memdataready <= '0';
+				memdataready <= '1';
 				if ad < blocksize then
 					buffermem(ad) := databus;
 				end if;
 
 			end if;
-			memdataready <= '1';
 		end if;
 	end process;
 end architecture behavioral;
