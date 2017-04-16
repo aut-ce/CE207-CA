@@ -31,7 +31,6 @@ begin
 			init := false;
 		end if;
 
-		databus <= (others => 'Z');
 		memdataready <= '0';
 
 		if  clk'event and clk = '1' then
@@ -49,7 +48,8 @@ begin
 				if ad < blocksize then
 					buffermem(ad) := databus;
 				end if;
-
+			elsif readmem = '0' then
+				databus <= (others => 'Z');
 			end if;
 		end if;
 	end process;
